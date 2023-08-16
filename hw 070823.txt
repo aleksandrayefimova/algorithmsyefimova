@@ -1,0 +1,109 @@
+// Реализовать методы в MyLinkedList, которые не успели в классе.
+// pushToTail(int data),
+// pushToIndex(int index, int data)
+// removeLast(),
+// remove(int index)
+// get(int index)
+
+class Node {
+    constructor(data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class MyLinkedList {
+    constructor() {
+        this.head = null;
+    }
+
+    pushToTail(data) {
+        if (this.head == null) {
+            this.head = new Node(data);
+        } else {
+            let currentNode = this.head;
+            while (currentNode.next != null) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = new Node(data);
+        }
+    }
+
+    pushToIndex(index, data) {
+        if (index < 0) {
+            console.log("The index can not be negative");
+        } else if (index == 0) {
+            const newNode = new Node(data);
+            newNode.next = this.head;
+            this.head = newNode;
+        } else {
+            let currentNode = this.head;
+            for (let i = 0; i < index - 1; i++) {
+                if (currentNode == null) {
+                    console.log("The index is out of range");
+                    return;
+                }
+                currentNode = currentNode.next;
+            }
+            const newNode = new Node(data);
+            newNode.next = currentNode.next;
+            currentNode.next = newNode;
+        }
+    }
+    removeLast() {
+        if (this.head == null) {
+            console.log("the linked list is empty");
+        } else if (this.head.next == null) {
+            this.head = null;
+        } else {
+            let currentNode = this.head;
+            while (currentNode.next.next !== null) {
+                currentNode = currentNode.next;
+            }
+            currentNode.next = null;
+        }
+    }
+    remove(index) {
+        if (index < 0) console.log("The index cannot be negative");
+        else if (index == 0) {
+            if (!this.head) {
+                console.log("The linked list is empty");
+            } else {
+                this.head = this.head.next;
+            }
+        } else {
+            let currentNode = this.head;
+            for (let i = 0; i < index - 1; i++) {
+                if (!currentNode) {
+                    console.log("The inde xis out of range");
+                    return;
+                }
+                currentNode = currentNode.next;
+            }
+            currentNode.next = currentNode.next.next;
+        }
+    }
+    get(index) {
+        if (index < 0) console.log("The index can not be negative");
+        else if (index == 0) {
+            if (!this.head) {
+                console.log("the linked list is empty");
+            } else {
+                console.log(this.head.data);
+            }
+        } else {
+            let currentNode = this.head;
+            for (let i = 0; i < index; i++) {
+                if (!currentNode) {
+                    console.log("The index is out of bounds");
+                    return;
+                }
+                currentNode = currentNode.next;
+            }
+            console.log(currentNode.data);
+        }
+    }
+}
+
+const mainList = new MyLinkedList();
+
