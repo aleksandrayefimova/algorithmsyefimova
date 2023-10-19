@@ -1,0 +1,27 @@
+// Массив лифтов и их текущее положение
+const lifts = [
+  { name: "A", currentFloor: 0 },
+  { name: "B", currentFloor: 8 },
+  { name: "C", currentFloor: 7 }
+];
+
+// Функция для отправки наиближайшего лифта
+function sendNearestLift(destinationFloor) {
+  if (lifts.length === 0) {
+    console.log("Нет доступных лифтов.");
+    return;
+  }
+
+  // Рассчитываем расстояние от каждого лифта до вызывающего этажа
+  const distances = lifts.map(lift => Math.abs(lift.currentFloor - destinationFloor));
+
+  // Находим индекс лифта с минимальным расстоянием
+  const nearestLiftIndex = distances.indexOf(Math.min(...distances));
+
+  // Отправляем наиближайший лифт
+  const nearestLift = lifts[nearestLiftIndex];
+  console.log(`Отправляем лифт ${nearestLift.name} на этаж ${destinationFloor}`);
+}
+
+// Пример вызова функции с этажем, на который нужно отправить лифт
+sendNearestLift(1);
